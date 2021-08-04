@@ -66,5 +66,7 @@ void animation_combo_6(void);    // Ultra 2 — Metsu Hadouken
 // other function prototypes
 int animation_idle(void);
 
+// added functions
+void startup_animation(void);
 
 #endif
