@@ -149,6 +149,37 @@ void setLEDRandomColor(int index)
   }  
 }
 
+
+uint16_t checkJoyStick(int* iLED, int iR, int iG, int iB) 
+{
+  static uint16_t  joystickDirection;
+  joystickDirection = ATTACK_NONE;
+
+  if(!digitalRead(PIN_RIGHT))    
+    joystickDirection |= ATTACK_RIGHT;
+  if(!digitalRead(PIN_LEFT))
+    joystickDirection |= ATTACK_LEFT;
+  if(!digitalRead(PIN_DOWN))
+    joystickDirection |= ATTACK_DOWN;
+  if(!digitalRead(PIN_UP))
+    joystickDirection |= ATTACK_UP;
+
+  //if any joystick button is pressed, light em up
+  if(joystickDirection != ATTACK_NONE)
+  {
+    kaimana.setALL(iR, iG, iB);
+    iLED[LED_JOY] = true;
+  }
+  
+  else
+  {
+    iLED[LED_JOY] = false;
+  }
+
+  return joystickDirection;
+}
+
+
 //pulled out button checks into new function
 bool checkButton(int* iLED, int button, int led, int iR, int iG, int iB) 
 {
@@ -207,57 +238,7 @@ int pollSwitches(void)
   // read arduino pins and save results in the mapped LED if button is pressed (pin grounded)
 
   // complex special case for joystick but it's worth the effort
-  joystickDirection = ATTACK_NONE;
-
-  if(!digitalRead(PIN_RIGHT))    
-    joystickDirection |= ATTACK_RIGHT;
-  if(!digitalRead(PIN_LEFT))
-    joystickDirection |= ATTACK_LEFT;
-  if(!digitalRead(PIN_DOWN))
-    joystickDirection |= ATTACK_DOWN;
-  if(!digitalRead(PIN_UP))
-    joystickDirection |= ATTACK_UP;
-
-  switch(joystickDirection)
-  {
-    case ATTACK_RIGHT:    // right
-      kaimana.setLED(LED_JOY, 127, 220, 000); 
-      iLED[LED_JOY] = true;
-      break;
-    case ATTACK_LEFT:    // left
-      kaimana.setLED(LED_JOY, 127, 000, 220); 
-      iLED[LED_JOY] = true;
-      break;
-    case ATTACK_DOWN:    // down
-      kaimana.setLED(LED_JOY, 000, 220, 220);
-      iLED[LED_JOY] = true;
-      break;
-    case ATTACK_DOWN + ATTACK_RIGHT:    // down + right
-      kaimana.setLED(LED_JOY, 000, 255, 127); 
-      iLED[LED_JOY] = true;
-      break;
-    case ATTACK_DOWN + ATTACK_LEFT:    // down + left
-      kaimana.setLED(LED_JOY, 000, 127, 255); 
-      iLED[LED_JOY] = true;
-      break;
-    case ATTACK_UP:    // up
-      kaimana.setLED(LED_JOY, 255, 000, 000); 
-      iLED[LED_JOY] = true;
-      break;
-    case ATTACK_UP + ATTACK_RIGHT:    // up + right
-      kaimana.setLED(LED_JOY, 220, 127, 000); 
-      iLED[LED_JOY] = true;
-      break;
-    case ATTACK_UP + ATTACK_LEFT:   // up + left
-      kaimana.setLED(LED_JOY, 220, 000, 127); 
-      iLED[LED_JOY] = true;
-      break;
-    default:   // zero or any undefined value on an 8 way stick like UP+DOWN which is not happening on my watch
-      kaimana.setLED(LED_JOY, BLACK);    
-      iLED[LED_JOY] = false;
-      break;
-  }
-  
+  joystickDirection = checkJoyStick(iLED, WHITE);
 
   // clear results for switch activity
 
