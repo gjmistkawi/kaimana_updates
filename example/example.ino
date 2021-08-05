@@ -144,8 +144,50 @@ void setLEDRandomColor(int index)
   }  
 }
 
+void joystickCenterButton(uint16_t joystickDirection)
+{
+  switch(joystickDirection)
+  {
+    case ATTACK_RIGHT:    // right
+      kaimana.setLED(LED_P3, GREEN);    
+      kaimana.setLED(LED_P4, GREEN); 
+      break;
+    case ATTACK_LEFT:    // left
+      kaimana.setLED(LED_P3, GREEN);    
+      kaimana.setLED(LED_P4, GREEN);  
+      break;
+    case ATTACK_DOWN:    // down
+      kaimana.setLED(LED_P3, RED);    
+      kaimana.setLED(LED_P4, RED); 
+      break;
+    case ATTACK_DOWN + ATTACK_RIGHT:    // down + right
+      kaimana.setLED(LED_P3, YELLOW);    
+      kaimana.setLED(LED_P4, YELLOW); 
+      break;
+    case ATTACK_DOWN + ATTACK_LEFT:    // down + left
+      kaimana.setLED(LED_P3, YELLOW);    
+      kaimana.setLED(LED_P4, YELLOW); 
+      break;
+    case ATTACK_UP:    // up
+      kaimana.setLED(LED_P3, BLUE);    
+      kaimana.setLED(LED_P4, BLUE); 
+      break;
+    case ATTACK_UP + ATTACK_RIGHT:    // up + right
+      kaimana.setLED(LED_P3, AQUA);    
+      kaimana.setLED(LED_P4, AQUA); 
+      break;
+    case ATTACK_UP + ATTACK_LEFT:   // up + left
+      kaimana.setLED(LED_P3, AQUA);    
+      kaimana.setLED(LED_P4, AQUA); 
+      break;
+    default:   // zero or any undefined value on an 8 way stick like UP+DOWN which is not happening on my watch
+      kaimana.setLED(LED_P3, WHITE);    
+      kaimana.setLED(LED_P4, WHITE);   
+      break;
+  }  
+}
 
-uint16_t checkJoyStick(int* iLED, int iR, int iG, int iB) 
+uint16_t checkJoystick(int* iLED, int iR, int iG, int iB) 
 {
   static uint16_t  joystickDirection;
   joystickDirection = ATTACK_NONE;
@@ -163,6 +205,7 @@ uint16_t checkJoyStick(int* iLED, int iR, int iG, int iB)
   if(joystickDirection != ATTACK_NONE)
   {
     kaimana.setALL(iR, iG, iB);
+    joystickCenterButton(joystickDirection);
     iLED[LED_JOY] = true;
   }
   
@@ -233,7 +276,7 @@ int pollSwitches(void)
   // read arduino pins and save results in the mapped LED if button is pressed (pin grounded)
 
   // complex special case for joystick but it's worth the effort
-  joystickDirection = checkJoyStick(iLED, WHITE);
+  joystickDirection = checkJoystick(iLED, WHITE);
 
   // clear results for switch activity
 
