@@ -284,7 +284,7 @@ int pollSwitches(void)
     && iLED[LED_START] == true &&iLED[LED_JOY] == true)
   {
     tournament_mode = !tournament_mode;
-    tournament_mode_toggle_animation();
+    tournament_mode? tournament_mode_toggle_animation(RED): tournament_mode_toggle_animation(GREEN);
   }
 
   if(tournament_mode)

@@ -433,13 +433,15 @@ void blink_led_pair(int led1, int led2, int delay_time, int iR, int iG, int iB)
 
 //blink main button when toggling tournament mode
 //for clarity
-void tournament_mode_toggle_animation(void)
+void tournament_mode_toggle_animation(int iR, int iG, int iB)
 {
   int delay_time = IDLE_ANIMATION_DELAY*10;
-  
+  kaimana.setALL(BLACK);
+  kaimana.updateALL();
+
   for(int i = 0; i < 3; i++)
   {
-    blink_led_pair(LED_P3, LED_P4, delay_time, RED);
+    blink_led_pair(LED_P3, LED_P4, delay_time, iR, iG, iB);
     delay(delay_time);
   }
 }
