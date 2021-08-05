@@ -45,9 +45,14 @@ void setLEDRandomColor(int index);
 Kaimana kaimana;
 
 
+//global variable for toggle mode
+bool tournament_mode;
+
 // the setup routine runs first and once each time power is applied to the Kaimana board
 void setup() 
-{                
+{        
+  tournament_mode = false;
+
   // light up all leds at boot to demonstrate everything is functional
   showStartup();
 }
@@ -76,7 +81,7 @@ void loop()
     else
     {
         // no switches active so test for start of idle timeout  
-        if( millis() > ulTimeout )
+        if( !tournament_mode && millis() > ulTimeout )
         {
           animation_idle();
         }  
@@ -274,14 +279,21 @@ int pollSwitches(void)
       ++iActiveSwitchCount;
   }  
 
+  //tournament toggle check
+  if(iLED[LED_HOME] == true && iLED[LED_SELECT] == true 
+    && iLED[LED_START] == true &&iLED[LED_JOY] == true)
+  {
+    tournament_mode = !tournament_mode;
+  }
+
+  if(tournament_mode)
+  {
+    kaimana.setALL(BLACK);
+  }
+
   // update the leds with new/current colors in the array
   kaimana.updateALL();
   
   // return number of active switches
   return(iActiveSwitchCount);
 }  
-
-
-
- 
-

@@ -468,6 +468,7 @@ void startup_animation(void)
   }
 
   kaimana.setALL(PINK);
+  kaimana.updateALL();
 
   delay(BOOT_COLOR_DELAY*2);
   kaimana.setALL( BLACK );
