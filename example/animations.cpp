@@ -426,6 +426,7 @@ void blink_led_pair(int led1, int led2, int delay_time, int iR, int iG, int iB)
   kaimana.setLED( led1, BLACK );
   kaimana.setLED( led2, BLACK );
   kaimana.updateALL();
+  delay(1); //need delay of 1, otherwise leds stay dark
 }
 
 //Specific Animations
@@ -442,6 +443,8 @@ void startup_animation(void)
     blink_led_pair(LED_P3, LED_P4, delay_time, WHITE);
     delay(delay_time);
   }
+
+  delay(delay_time);
 
   kaimana.setLED( LED_P3, PINK);
   kaimana.setLED( LED_P4, PINK);
