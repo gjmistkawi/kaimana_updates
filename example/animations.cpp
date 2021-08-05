@@ -431,6 +431,19 @@ void blink_led_pair(int led1, int led2, int delay_time, int iR, int iG, int iB)
 
 //Specific Animations
 
+//blink main button when toggling tournament mode
+//for clarity
+void tournament_mode_toggle_animation(void)
+{
+  int delay_time = IDLE_ANIMATION_DELAY*10;
+  
+  for(int i = 0; i < 3; i++)
+  {
+    blink_led_pair(LED_P3, LED_P4, delay_time, RED);
+    delay(delay_time);
+  }
+}
+
 //creates a looping animation around the controller
 //my buttons are layed out oddly for wiring though,
 //so this will need to be editted by controller

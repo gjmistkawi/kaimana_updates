@@ -68,5 +68,6 @@ int animation_idle(void);
 
 // added functions
 void startup_animation(void);
+void tournament_mode_toggle_animation(void);
 
 #endif
