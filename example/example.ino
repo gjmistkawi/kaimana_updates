@@ -324,6 +324,11 @@ int pollSwitches(void)
       ++iActiveSwitchCount;
   }  
 
+  if(iActiveSwitchCount == 0)
+  {
+    kaimana.setALL(BLACK);
+  }
+
   //tournament toggle check
   if(iLED[LED_HOME] == true && iLED[LED_SELECT] == true 
     && iLED[LED_START] == true &&iLED[LED_JOY] == true)
