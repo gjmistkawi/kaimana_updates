@@ -429,18 +429,18 @@ void startup_animation(void)
 
   for(int i = 0; i < 3; i++)
   {
-    blink(LED_K1,     delay_time, BLUE);
-    blink(LED_K2,     delay_time, BLUE);
-    blink(LED_K3,     delay_time, BLUE);
-    blink(LED_K4,     delay_time, BLUE);
-    blink(LED_GUIDE,  delay_time, BLUE);
-    blink(LED_BACK,   delay_time, BLUE);
-    blink(LED_P1,     delay_time, BLUE);
-    blink(LED_P2,     delay_time, BLUE);
-    blink(LED_START,  delay_time, BLUE);
-    blink(LED_SELECT, delay_time, BLUE);
-    blink(LED_HOME,   delay_time, BLUE);
-    blink(LED_JOY,    delay_time, BLUE);
+    blink_led(LED_K1,     delay_time, BLUE);
+    blink_led(LED_K2,     delay_time, BLUE);
+    blink_led(LED_K3,     delay_time, BLUE);
+    blink_led(LED_K4,     delay_time, BLUE);
+    blink_led(LED_GUIDE,  delay_time, BLUE);
+    blink_led(LED_BACK,   delay_time, BLUE);
+    blink_led(LED_P1,     delay_time, BLUE);
+    blink_led(LED_P2,     delay_time, BLUE);
+    blink_led(LED_START,  delay_time, BLUE);
+    blink_led(LED_SELECT, delay_time, BLUE);
+    blink_led(LED_HOME,   delay_time, BLUE);
+    blink_led(LED_JOY,    delay_time, BLUE);
   }
 
   delay(BOOT_COLOR_DELAY);
