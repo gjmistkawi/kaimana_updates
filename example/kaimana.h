@@ -95,7 +95,7 @@
 #define  WHITE    255,255,255
 #define  PINK     255,000,255
 #define  ORANGE   127,073,006
-
+#define  GOLD     255,215,000
 
 
 // RGB value structure.
