@@ -46,12 +46,14 @@ Kaimana kaimana;
 
 
 //global variable for toggle mode
-bool tournament_mode;
+bool  tournament_mode;
+int   tournament_mode_counter;
 
 // the setup routine runs first and once each time power is applied to the Kaimana board
 void setup() 
 {        
   tournament_mode = false;
+  tournament_mode_counter = 0;
 
   // light up all leds at boot to demonstrate everything is functional
   showStartup();
@@ -326,8 +328,16 @@ int pollSwitches(void)
   if(iLED[LED_HOME] == true && iLED[LED_SELECT] == true 
     && iLED[LED_START] == true &&iLED[LED_JOY] == true)
   {
-    tournament_mode = !tournament_mode;
-    tournament_mode? tournament_mode_toggle_animation(RED): tournament_mode_toggle_animation(GREEN);
+    if(tournament_mode_counter < 15)
+    {
+      tournament_mode_counter++;
+    }
+    else
+    {
+      tournament_mode_counter = 0;
+      tournament_mode = !tournament_mode;
+      tournament_mode? tournament_mode_toggle_animation(RED): tournament_mode_toggle_animation(GREEN);
+    }
   }
 
   if(tournament_mode)
