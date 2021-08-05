@@ -91,8 +91,11 @@
 #define  YELLOW   255,255,000
 #define  BLUE     000,000,255
 #define  PURPLE   255,000,255
-#define  CYAN     000,255,255
+#define  AQUA     000,255,255
 #define  WHITE    255,255,255
+#define  PINK     255,000,255
+#define  ORANGE   127,073,006
+
 
 
 // RGB value structure.

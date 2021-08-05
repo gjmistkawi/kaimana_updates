@@ -113,6 +113,7 @@
 #define  COLOR_RANDOM_6    255,000,000    // red
 #define  COLOR_RANDOM_7    220,127,000    // orange
 #define  COLOR_RANDOM_8    220,000,127    // magenta
+#define  PINK
 
 
 // definitions for combo switch patterns

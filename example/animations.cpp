@@ -402,15 +402,30 @@ void animation_combo_6(void)
   kaimana.setALL(BLACK);
 }
 
+
 //New animations
 //Generic Animations
 
+//turns 1 led on for a duration, then back to black
 void blink_led(int led, int delay_time, int iR, int iG, int iB)
 {
   kaimana.setLED( led, iR, iG, iB);
   kaimana.updateALL();
   delay(delay_time);
   kaimana.setLED( led, BLACK );
+  kaimana.updateALL();
+}
+
+//turns 2 leds on for a duration, then back to black
+void blink_led_pair(int led1, int led2, int delay_time, int iR, int iG, int iB)
+{
+  kaimana.setLED( led1, iR, iG, iB);
+  kaimana.setLED( led2, iR, iG, iB);
+  kaimana.updateALL();
+  delay(delay_time);
+  kaimana.setLED( led1, BLACK );
+  kaimana.setLED( led2, BLACK );
+  kaimana.updateALL();
 }
 
 //Specific Animations
@@ -424,28 +439,34 @@ void startup_animation(void)
 
   for(int i = 0; i < 3; i++)
   {
-    
+    blink_led_pair(LED_P3, LED_P4, delay_time, WHITE);
+    delay(delay_time);
   }
+
+  kaimana.setLED( LED_P3, PINK);
+  kaimana.setLED( LED_P4, PINK);
+
+  blink_led(LED_K1,     delay_time, AQUA);
 
   for(int i = 0; i < 3; i++)
   {
-    blink_led(LED_K1,     delay_time, BLUE);
-    blink_led(LED_K2,     delay_time, BLUE);
-    blink_led(LED_K3,     delay_time, BLUE);
-    blink_led(LED_K4,     delay_time, BLUE);
-    blink_led(LED_GUIDE,  delay_time, BLUE);
-    blink_led(LED_BACK,   delay_time, BLUE);
-    blink_led(LED_P1,     delay_time, BLUE);
-    blink_led(LED_P2,     delay_time, BLUE);
-    blink_led(LED_START,  delay_time, BLUE);
-    blink_led(LED_SELECT, delay_time, BLUE);
-    blink_led(LED_HOME,   delay_time, BLUE);
-    blink_led(LED_JOY,    delay_time, BLUE);
+    blink_led_pair(LED_K2,     LED_K1,     delay_time, AQUA);
+    blink_led_pair(LED_K3,     LED_K2,     delay_time, AQUA);
+    blink_led_pair(LED_K4,     LED_K3,     delay_time, AQUA);
+    blink_led_pair(LED_GUIDE,  LED_K4,     delay_time, AQUA);
+    blink_led_pair(LED_BACK,   LED_GUIDE,  delay_time, AQUA);
+    blink_led_pair(LED_P1,     LED_BACK,   delay_time, AQUA);
+    blink_led_pair(LED_P2,     LED_P1,     delay_time, AQUA);
+    blink_led_pair(LED_START,  LED_P2,     delay_time, AQUA);
+    blink_led_pair(LED_SELECT, LED_START,  delay_time, AQUA);
+    blink_led_pair(LED_HOME,   LED_SELECT, delay_time, AQUA);
+    blink_led_pair(LED_JOY,    LED_HOME,   delay_time, AQUA);
+    blink_led_pair(LED_K1,     LED_JOY,    delay_time, AQUA);
   }
 
-  delay(BOOT_COLOR_DELAY);
+  kaimana.setALL(PINK);
+
+  delay(BOOT_COLOR_DELAY*2);
   kaimana.setALL( BLACK );
   delay( BOOT_COMPLETE_DELAY );
 }
-
-
