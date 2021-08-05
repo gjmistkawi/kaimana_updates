@@ -402,72 +402,45 @@ void animation_combo_6(void)
   kaimana.setALL(BLACK);
 }
 
+//New animations
+//Generic Animations
+
+void blink_led(int led, int delay_time, int iR, int iG, int iB)
+{
+  kaimana.setLED( led, iR, iG, iB);
+  kaimana.updateALL();
+  delay(delay_time);
+  kaimana.setLED( led, BLACK );
+}
+
+//Specific Animations
+
 //creates a looping animation around the controller
 //my buttons are layed out oddly for wiring though,
 //so this will need to be editted by controller
 void startup_animation(void)
 {
+  int delay_time = IDLE_ANIMATION_DELAY*10;
+
   for(int i = 0; i < 3; i++)
   {
-    kaimana.setLED( LED_K1, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_K1, BLACK );
+    
+  }
 
-    kaimana.setLED( LED_K2, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_K2, BLACK );
-
-    kaimana.setLED( LED_K3, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_K3, BLACK );
-
-    kaimana.setLED( LED_K4, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_K4, BLACK );
-
-    kaimana.setLED( LED_GUIDE, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_GUIDE, BLACK );
-
-    kaimana.setLED( LED_BACK, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_BACK, BLACK );
-
-    kaimana.setLED( LED_P1, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_P1, BLACK );
-
-    kaimana.setLED( LED_P2, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_P2, BLACK );
-
-    kaimana.setLED( LED_START, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_START, BLACK );
-
-    kaimana.setLED( LED_SELECT, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_SELECT, BLACK );
-
-    kaimana.setLED( LED_HOME, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_HOME, BLACK );
-
-    kaimana.setLED( LED_JOY, BLUE );
-    kaimana.updateALL();
-    delay(BOOT_COLOR_DELAY);
-    kaimana.setLED( LED_JOY, BLACK );
+  for(int i = 0; i < 3; i++)
+  {
+    blink(LED_K1,     delay_time, BLUE);
+    blink(LED_K2,     delay_time, BLUE);
+    blink(LED_K3,     delay_time, BLUE);
+    blink(LED_K4,     delay_time, BLUE);
+    blink(LED_GUIDE,  delay_time, BLUE);
+    blink(LED_BACK,   delay_time, BLUE);
+    blink(LED_P1,     delay_time, BLUE);
+    blink(LED_P2,     delay_time, BLUE);
+    blink(LED_START,  delay_time, BLUE);
+    blink(LED_SELECT, delay_time, BLUE);
+    blink(LED_HOME,   delay_time, BLUE);
+    blink(LED_JOY,    delay_time, BLUE);
   }
 
   delay(BOOT_COLOR_DELAY);
