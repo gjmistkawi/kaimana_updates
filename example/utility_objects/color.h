@@ -14,7 +14,7 @@ class Color {
         uint8_t r(void);
         uint8_t g(void);
         uint8_t b(void);
-}
+};
 
 #endif
 

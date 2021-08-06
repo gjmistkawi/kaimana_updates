@@ -6,14 +6,16 @@ Color::Color(int r, int g, int b) {
     _b = b;
 }
 
+// Getters
+
 uint8_t Color::r() {
-    return this->_r;
+    return _r;
 }
 
 uint8_t Color::g() {
-    return this->_g;
+    return _g;
 }
 
 uint8_t Color::b() {
-    return this->_b;
+    return _b;
 }
