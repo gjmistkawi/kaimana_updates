@@ -285,7 +285,7 @@ int pollSwitches(void)
   switchActivity = ATTACK_NONE;
 
   //fucntion buttons
-  checkButton(iLED, PIN_HOME, LED_HOME, BLUE);
+  checkButton(iLED, PIN_HOME, LED_HOME, BLUE) ? led_checker() : true;
   checkButton(iLED, PIN_SELECT, LED_SELECT, BLUE);
   checkButton(iLED, PIN_START, LED_START, BLUE);
 
@@ -294,10 +294,10 @@ int pollSwitches(void)
   checkButton(iLED, PIN_P2, LED_P2, COLOR_RANDOM_2) ? switchActivity |= ATTACK_P2 : true;
   checkButton(iLED, PIN_P3, LED_P3, COLOR_RANDOM_3) ? switchActivity |= ATTACK_P3 : true;
   checkButton(iLED, PIN_P4, LED_P4, COLOR_RANDOM_4) ? switchActivity |= ATTACK_P4 : true;
-  checkButton(iLED, PIN_K1, LED_K1, COLOR_RANDOM_5) ? switchActivity |= ATTACK_K1 : true;
+  checkButton(iLED, PIN_K1, LED_K1, COLOR_RANDOM_5) ? (combo_break_animation(), switchActivity |= ATTACK_K1) : true;
   checkButton(iLED, PIN_K2, LED_K2, COLOR_RANDOM_6) ? switchActivity |= ATTACK_K2 : true;
   checkButton(iLED, PIN_K3, LED_K3, COLOR_RANDOM_7) ? switchActivity |= ATTACK_K3 : true;
-  checkButton(iLED, PIN_K4, LED_K4, COLOR_RANDOM_8) ? switchActivity |= ATTACK_K4 : true;
+  checkButton(iLED, PIN_K4, LED_K4, COLOR_RANDOM_8) ? switchActivity |= ATTACK_K4 : true; 
 
 
   // convert joystick, P1-P4, K1-K4 into a single unsigned int
