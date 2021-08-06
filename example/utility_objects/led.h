@@ -14,7 +14,7 @@ class LED {
         void setColor(Color*);
         int getId(void);
         bool isOn(void);
-        void changeStatus(bool);
+        void toggleOn(bool);
         Color* getColor(void);
 };
 

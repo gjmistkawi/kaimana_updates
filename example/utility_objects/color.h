@@ -17,8 +17,3 @@ class Color {
 };
 
 #endif
-
-//#include <unordered_map>
-//uordered_map<string, *color> colors = {
-//  {"blue", new color(...)}    
-//}

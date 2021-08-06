@@ -1,6 +1,6 @@
 #include "rgb_colors.h"
 #include "color.h"
-#include<stdlib.h>
+#include <stdlib.h>
 
 
 RGB_Colors::RGB_Colors(void) {
@@ -20,6 +20,15 @@ RGB_Colors::RGB_Colors(void) {
         new Color(127,220,000)    //lime_green
     };
 }
+
+RGB_Colors::~RGB_Colors(void) {
+    int length = sizeof(_colors)/sizeof(*_colors);
+    
+    for(int i = 0; i < length; i++) {
+        delete _colors[i];
+    }
+}
+
 
 Color* RGB_Colors::randomColor(void) {
     int length = sizeof(_colors)/sizeof(*_colors);

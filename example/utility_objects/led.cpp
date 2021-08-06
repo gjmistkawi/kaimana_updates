@@ -10,7 +10,7 @@ LED::LED(int id, Color* color) {
 
 // Setters
 
-void LED::changeStatus(bool on) {
+void LED::toggleOn(bool on) {
     _isOn = on;
 }
 

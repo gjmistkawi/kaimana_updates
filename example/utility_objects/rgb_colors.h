@@ -9,6 +9,7 @@ class RGB_Colors {
 
     public:
         RGB_Colors(void);
+        ~RGB_Colors(void);
         Color* randomColor(void);
         Color* red(void);
         Color* green(void);
