@@ -403,6 +403,43 @@ void animation_combo_6(void)
 }
 
 
+//Utility functions
+// set LED to one of 8 predefined colors selected at random
+//
+void setLEDRandomColor2(int index)
+{
+  switch(random(1,8))    // pick a random color between 1 and 8
+  {
+    case 1:
+      kaimana.setLED(index, COLOR_RANDOM_1);
+      break;
+    case 2:
+      kaimana.setLED(index, COLOR_RANDOM_2);
+      break;
+    case 3:
+      kaimana.setLED(index, COLOR_RANDOM_3);
+      break;
+    case 4:
+      kaimana.setLED(index, COLOR_RANDOM_4);
+      break;
+    case 5:
+      kaimana.setLED(index, COLOR_RANDOM_5);
+      break;
+    case 6:
+      kaimana.setLED(index, COLOR_RANDOM_6);
+      break;
+    case 7:
+      kaimana.setLED(index, COLOR_RANDOM_7);
+      break;
+    case 8:
+      kaimana.setLED(index, COLOR_RANDOM_8);
+      break;
+    default:   // any undefined value so discard data and set led to BLACK
+      kaimana.setLED(index, BLACK);    
+      break;
+  }  
+}
+
 //New animations
 //Generic Animations
 
@@ -430,6 +467,40 @@ void blink_led_pair(int led1, int led2, int delay_time, int iR, int iG, int iB)
 }
 
 //Specific Animations
+
+bool led_checker(void)
+{
+  int delay_time = 500;
+
+  for(int i = 0; i < 14; i++)
+  {
+    kaimana.setALL(BLACK);
+    kaimana.setLED(i, WHITE);
+    kaimana.updateALL();
+    delay(delay_time);
+  }
+  return true;
+}
+
+//animation runs when combo-break button is pressed
+void combo_break_animation(void)
+{
+  int delay_time = 50;
+
+  for(int i = 0; i < 20; i++)
+  {
+    kaimana.setALL(WHITE);
+    for(int j = 0; j < 14; j++)
+    {
+      if((i%2) == (j%2))
+      {
+        setLEDRandomColor2(j);
+      }
+    }
+    kaimana.updateALL();
+    delay(delay_time);
+  }
+}
 
 //blink main button when toggling tournament mode
 //for clarity
