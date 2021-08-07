@@ -24,7 +24,7 @@
 //  Revised:  October 29, 2013    zonbipanda // gmail.com
 //  Revised:  April   11, 2015    zonbipanda // gmail.com  -- Arduino 1.6.3 Support
 //
-
+/*
 #ifndef __animations_h__
 #define __animations_h__
 
@@ -32,17 +32,10 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include "Arduino.h"
-#include "kaimana.h"
-#include "kaimana_custom.h"
+//#include "kaimana.h"
+//#include "kaimana_custom.h"
 
 extern Kaimana kaimana;
-
-
-#define IDLE_SIZE           768    // size of animation array
-#define IDLE_OFFSET_2       512    // used to create animation -- see code
-#define IDLE_OFFSET_1       256    // used to create animation -- see code
-#define IDLE_OFFSET_0         0    // used to create animation -- see code
-#define IDLE_OFFSET          12    // used to create animation -- see code
 
 #define FIREBALL_SIZE       768    // size of animation array
 #define FIREBALL_OFFSET_3   288    // used to create animation -- see code
@@ -72,4 +65,4 @@ void tournament_mode_toggle_animation(int, int, int);
 void combo_break_animation(void);
 bool led_checker(void);
 
-#endif
+#endif*/

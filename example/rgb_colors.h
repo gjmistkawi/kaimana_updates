@@ -1,16 +1,20 @@
 #ifndef __rgb_colors_h__
 #define __rgb_colors_h__
 
-#include"color.h"
+#include <stdlib.h>
+#include "color.h"
+#include "constants.h"
 
 class RGB_Colors {
     private:
-        Color** _colors;
+        Color* _colors[COLOR_COUNT];
 
     public:
         RGB_Colors(void);
         ~RGB_Colors(void);
         Color* randomColor(void);
+        Color* white(void);
+        Color* black(void);
         Color* red(void);
         Color* green(void);
         Color* blue(void);
@@ -22,9 +26,7 @@ class RGB_Colors {
         Color* purple(void);
         Color* cobalt(void);
         Color* magenta(void);
-        Color* lime_green(void);
-        Color* white(void);
-
+        Color* limeGreen(void);
 };
 
 #endif

@@ -3,7 +3,7 @@
 
 LED::LED(int id, Color* color) {
     _id = id;
-    _isOn = false;
+    _isOn = true;
     _color = color;
 }
 

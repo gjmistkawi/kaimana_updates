@@ -24,13 +24,13 @@
 //  Revised:  October 29, 2013    zonbipanda // gmail.com
 //  Revised:  April   11, 2015    zonbipanda // gmail.com  -- Arduino 1.6.3 Support
 //
-
+/*
 #define __PROG_TYPES_COMPAT__
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include "Arduino.h"
-#include "kaimana.h"
-#include "kaimana_custom.h"
+//#include "kaimana.h"
+//#include "kaimana_custom.h"
 #include "animations.h"
 
 
@@ -560,3 +560,4 @@ void startup_animation(void)
   kaimana.setALL( BLACK );
   delay( BOOT_COMPLETE_DELAY );
 }
+*/
