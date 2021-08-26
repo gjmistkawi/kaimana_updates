@@ -32,70 +32,7 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include "Arduino.h"
-#include "kaimana_custom.h"
-
-
-// Map function names to arduino leonardo atmega32u4 digital pin numbers
-// specific to ParadiseArcadeShop.com Kaimana board (PS360+LED)
-#define  PIN_DOWN    11
-#define  PIN_UP      18
-#define  PIN_LEFT    19
-#define  PIN_RIGHT   20
-#define  PIN_HOME    8
-#define  PIN_GUIDE   8
-#define  PIN_SELECT  9
-#define  PIN_BACK    9
-#define  PIN_START   10
-#define  PIN_P1      3
-#define  PIN_P2      2
-#define  PIN_P3      0
-#define  PIN_P4      1
-#define  PIN_K1      4
-#define  PIN_K2      21
-#define  PIN_K3      12
-#define  PIN_K4      6
-//
-#define  PIN_LED     23
-
-
-// Map function names to binary input masks on atmega32u4 digital pin numbers
-// specific to ParadiseArcadeShop.com Kaimana board (PS360+LED)
-#define  ATTACK_UP      0x0800UL
-#define  ATTACK_DOWN    0x0400UL
-#define  ATTACK_LEFT    0x0200UL
-#define  ATTACK_RIGHT   0x0100UL
-#define  ATTACK_K4      0x0080UL
-#define  ATTACK_K3      0x0040UL
-#define  ATTACK_K2      0x0020UL
-#define  ATTACK_K1      0x0010UL
-#define  ATTACK_P4      0x0008UL
-#define  ATTACK_P3      0x0004UL
-#define  ATTACK_P2      0x0002UL
-#define  ATTACK_P1      0x0001UL
-#define  ATTACK_NONE    0x0000UL
-#define  ATTACK_FALSE   0xFFFFUL
-
-
-// number of switch inputs on kaimana
-#define  SWITCH_COUNT         15
-
-// if this is changed then Kaimana::switchHistoryTest must also be revised
-#define SWITCH_HISTORY_MAX  16
-
-
-// basic color definitions with various R,G,B values
-// generic (may  want to prefix with COLOR_* to localize further)
-#define  BLACK    000,000,000
-#define  RED      255,000,000
-#define  GREEN    000,255,000
-#define  YELLOW   255,255,000
-#define  BLUE     000,000,255
-#define  PURPLE   255,000,255
-#define  AQUA     000,255,255
-#define  WHITE    255,255,255
-#define  PINK     255,000,255
-#define  ORANGE   127,073,006
-#define  GOLD     255,215,000
+#include "constants.h"
 
 
 // RGB value structure.
@@ -122,24 +59,24 @@ class Kaimana
 
   public:
     Kaimana(void);
-    void    setLED(int index, int iR, int iG, int iB);
+    void    setLED(int led, int iR, int iG, int iB);
+    void    setLEDRandomColor(int led);
     void    setALL(int iR, int iG, int iB);
     void    updateALL(void);
     void    switchHistoryClear(void);
     void    switchHistorySet(uint16_t latestValue);
-    boolean switchHistoryTest( uint16_t a0=ATTACK_FALSE, uint16_t a1=ATTACK_FALSE, uint16_t a2=ATTACK_FALSE,  uint16_t a3=ATTACK_FALSE,  uint16_t a4=ATTACK_FALSE,  uint16_t a5=ATTACK_FALSE,  uint16_t a6=ATTACK_FALSE,  uint16_t a7=ATTACK_FALSE, uint16_t a8=ATTACK_FALSE, uint16_t a9=ATTACK_FALSE, uint16_t a10=ATTACK_FALSE, uint16_t a11=ATTACK_FALSE, uint16_t a12=ATTACK_FALSE, uint16_t a13=ATTACK_FALSE, uint16_t a14=ATTACK_FALSE, uint16_t a15=ATTACK_FALSE );
+    boolean switchHistoryTest( uint16_t a0=MASK_ATTACK_FALSE, uint16_t a1=MASK_ATTACK_FALSE, uint16_t a2=MASK_ATTACK_FALSE,  uint16_t a3=MASK_ATTACK_FALSE,  uint16_t a4=MASK_ATTACK_FALSE,  uint16_t a5=MASK_ATTACK_FALSE,  uint16_t a6=MASK_ATTACK_FALSE,  uint16_t a7=MASK_ATTACK_FALSE, uint16_t a8=MASK_ATTACK_FALSE, uint16_t a9=MASK_ATTACK_FALSE, uint16_t a10=MASK_ATTACK_FALSE, uint16_t a11=MASK_ATTACK_FALSE, uint16_t a12=MASK_ATTACK_FALSE, uint16_t a13=MASK_ATTACK_FALSE, uint16_t a14=MASK_ATTACK_FALSE, uint16_t a15=MASK_ATTACK_FALSE );
 };
 
 
 // prototypes for Kaimana functions
 // specific to ParadiseArcadeShop.com Kaimana board (PS360+LED)
-void 	setLED(int index, int iR, int iG, int iB);
-void 	setALL(int iR, int iG, int iB);
-void 	updateALL(void);
-void 	switchHistoryClear(void);
-void 	switchHistorySet(uint16_t latestValue);
-boolean switchHistoryTest( uint16_t a0=ATTACK_FALSE, uint16_t a1=ATTACK_FALSE, uint16_t a2=ATTACK_FALSE,  uint16_t a3=ATTACK_FALSE,  uint16_t a4=ATTACK_FALSE,  uint16_t a5=ATTACK_FALSE,  uint16_t a6=ATTACK_FALSE,  uint16_t a7=ATTACK_FALSE, uint16_t a8=ATTACK_FALSE, uint16_t a9=ATTACK_FALSE, uint16_t a10=ATTACK_FALSE, uint16_t a11=ATTACK_FALSE, uint16_t a12=ATTACK_FALSE, uint16_t a13=ATTACK_FALSE, uint16_t a14=ATTACK_FALSE, uint16_t a15=ATTACK_FALSE );
+//void 	setLED(int index, int iR, int iG, int iB);
+//void 	setALL(int iR, int iG, int iB);
+//void 	updateALL(void);
+//void 	switchHistoryClear(void);
+//void 	switchHistorySet(uint16_t latestValue);
+//boolean switchHistoryTest( uint16_t a0=MASK_ATTACK_FALSE, uint16_t a1=MASK_ATTACK_FALSE, uint16_t a2=MASK_ATTACK_FALSE,  uint16_t a3=MASK_ATTACK_FALSE,  uint16_t a4=MASK_ATTACK_FALSE,  uint16_t a5=MASK_ATTACK_FALSE,  uint16_t a6=MASK_ATTACK_FALSE,  uint16_t a7=MASK_ATTACK_FALSE, uint16_t a8=MASK_ATTACK_FALSE, uint16_t a9=MASK_ATTACK_FALSE, uint16_t a10=MASK_ATTACK_FALSE, uint16_t a11=MASK_ATTACK_FALSE, uint16_t a12=MASK_ATTACK_FALSE, uint16_t a13=MASK_ATTACK_FALSE, uint16_t a14=MASK_ATTACK_FALSE, uint16_t a15=MASK_ATTACK_FALSE );
 
 
 #endif
-

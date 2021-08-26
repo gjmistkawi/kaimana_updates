@@ -30,7 +30,7 @@
 #include <avr/pgmspace.h>
 #include "Arduino.h"
 #include "kaimana.h"
-#include "kaimana_custom.h"
+#include "constants.h"
 
 
 Kaimana::Kaimana(void)
@@ -66,30 +66,72 @@ Kaimana::Kaimana(void)
 }
 
 
-void Kaimana::setLED(int index, int iR, int iG, int iB)
+void Kaimana::setLED(int led, int iR, int iG, int iB)
 {
   // set led identified by index to the RGB color passed to this function
-  if(index >=0 && index < LED_COUNT)
+  if(led >=0 && led < LED_COUNT)
   {
-    _led[index].r=iR;
-    _led[index].g=iG;
-    _led[index].b=iB;
+    _led[led].r=iR;
+    _led[led].g=iG;
+    _led[led].b=iB;
   }
 }  
+
+void Kaimana::setLEDRandomColor(int led) {
+  switch(random(1,12)) {
+    case 1:
+      setLED(led, RED);
+      break;
+    case 2:
+      setLED(led, GREEN);
+      break;
+    case 3:
+      setLED(led, BLUE);
+      break;
+    case 4:
+      setLED(led, GOLD);
+      break;
+    case 5:
+      setLED(led, YELLOW);
+      break;
+    case 6:
+      setLED(led, PINK);
+      break;
+    case 7:
+      setLED(led, CYAN);
+      break;
+    case 8:
+      setLED(led, ORANGE);
+      break;
+    case 9:
+      setLED(led, PURPLE);
+      break;
+    case 10:
+      setLED(led, COBALT);
+      break;
+    case 11:
+      setLED(led, MAGENTA);
+      break;
+    case 12:
+      setLED(led, LIME);
+      break;
+    default:
+      setLED(led, BLACK);
+      break;  
+  }
+}
 
 
 void Kaimana::setALL(int iR, int iG, int iB)
 {
-  int index;
-
   // set all leds in the array to the RGB color passed to this function
-  for(index=0;index<LED_COUNT;++index)
+  for(int i = 0; i < LED_COUNT; ++i)
   {
-    setLED( index, iR, iG, iB );
+    setLED(i, iR, iG, iB);
   }
 
   // update the leds with new/current colors in the array
-  updateALL();
+  //updateALL();
 }
 
 
@@ -213,7 +255,7 @@ void Kaimana::updateALL(void)
     [pin] "I" (0) \
   : "r18", "r19", "r20", "r26", "r27", "cc", "memory" \
   );
-}  
+}
 
 
 
@@ -228,7 +270,7 @@ void Kaimana::switchHistoryClear(void)
 
 void Kaimana::switchHistorySet(uint16_t latestValue)
 {
-  static int  i;
+  static int i;
 
   // add new history entry on change
   if(_switchHistory[0] != latestValue)
@@ -245,60 +287,58 @@ void Kaimana::switchHistorySet(uint16_t latestValue)
 
 boolean Kaimana::switchHistoryTest( uint16_t a0, uint16_t a1, uint16_t a2,  uint16_t a3,  uint16_t a4,  uint16_t a5,  uint16_t a6,  uint16_t a7, uint16_t a8, uint16_t a9, uint16_t a10, uint16_t a11, uint16_t a12, uint16_t a13, uint16_t a14, uint16_t a15 )
 {
-  static boolean result;
- 
-  result = true;
+  bool result = true;
   
   // if no parameters are passed to function then all default values are used and will result in a match returning a true
   // this is a great way to test the functionality without added complexity
   
-  if(a0 != ATTACK_FALSE)
+  if(a0 != MASK_ATTACK_FALSE)
     if(a0 != _switchHistory[0])
       result = false;
-  if(a1 != ATTACK_FALSE)
+  if(a1 != MASK_ATTACK_FALSE)
     if(a1 != _switchHistory[1])
       result = false;
-  if(a2 != ATTACK_FALSE)
+  if(a2 != MASK_ATTACK_FALSE)
     if(a2 != _switchHistory[2])
       result = false;
-  if(a3 != ATTACK_FALSE)
+  if(a3 != MASK_ATTACK_FALSE)
     if(a3 != _switchHistory[3])
       result = false;
-  if(a4 != ATTACK_FALSE)
+  if(a4 != MASK_ATTACK_FALSE)
     if(a4 != _switchHistory[4])
       result = false;
-  if(a5 != ATTACK_FALSE)
+  if(a5 != MASK_ATTACK_FALSE)
     if(a5 != _switchHistory[5])
       result = false;
-  if(a6 != ATTACK_FALSE)
+  if(a6 != MASK_ATTACK_FALSE)
     if(a6 != _switchHistory[6])
       result = false;
-  if(a7 != ATTACK_FALSE)
+  if(a7 != MASK_ATTACK_FALSE)
     if(a7 != _switchHistory[7])
       result = false;
 
-  if(a8 != ATTACK_FALSE)
+  if(a8 != MASK_ATTACK_FALSE)
     if(a8 != _switchHistory[8])
       result = false;
-  if(a9 != ATTACK_FALSE)
+  if(a9 != MASK_ATTACK_FALSE)
     if(a9 != _switchHistory[9])
       result = false;
-  if(a10 != ATTACK_FALSE)
+  if(a10 != MASK_ATTACK_FALSE)
     if(a10 != _switchHistory[10])
       result = false;
-  if(a11 != ATTACK_FALSE)
+  if(a11 != MASK_ATTACK_FALSE)
     if(a11 != _switchHistory[11])
       result = false;
-  if(a12 != ATTACK_FALSE)
+  if(a12 != MASK_ATTACK_FALSE)
     if(a12 != _switchHistory[12])
       result = false;
-  if(a13 != ATTACK_FALSE)
+  if(a13 != MASK_ATTACK_FALSE)
     if(a13 != _switchHistory[13])
       result = false;
-  if(a14 != ATTACK_FALSE)
+  if(a14 != MASK_ATTACK_FALSE)
     if(a14 != _switchHistory[14])
       result = false;
-  if(a15 != ATTACK_FALSE)
+  if(a15 != MASK_ATTACK_FALSE)
     if(a15 != _switchHistory[15])
       result = false;
   
@@ -308,9 +348,3 @@ boolean Kaimana::switchHistoryTest( uint16_t a0, uint16_t a1, uint16_t a2,  uint
     
   return(result);
 }
-
-
-
-
-
-

@@ -1,120 +1,139 @@
-//  kaimana_local.h
-//
-//  Copyright 2013 Paradise Arcade Shop, ParadiseArcadeShop.com
-//  All rights reserved.  Use is subject to license terms.
-//
-//  Code is provided for entertainment purposes and use with the Kaimana controller.
-//  Code may be copied, modified, resused with this Copyright notice.
-//  No commercial use without written permission from Paradise Arcade Shop.
-//
-//  Paradise Arcade Shop Kaimana LED Driver Board
-//  Initial Release October 15, 2013
-//
-//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//  THE SOFTWARE.
-//
-//  Kaimana localization file based on original source released by ParadiseArcadeShop.com October 15, 2013
-//
-//  Created:  October 24, 2013    zonbipanda // gmail.com  -- Arduino 1.0.5 Support
-//  Revised:  October 29, 2013    zonbipanda // gmail.com
-//  Revised:  April   11, 2015    zonbipanda // gmail.com  -- Arduino 1.6.3 Support
-//
-
-#ifndef __kaimana_local_h__
-#define __kaimana_local_h__
+#ifndef __constants_h__
+#define __constants_h__
 
 #define __PROG_TYPES_COMPAT__
+
 #include <avr/io.h>
 #include <avr/pgmspace.h>
-#include "Arduino.h"
-#include "kaimana.h"
 
+typedef uint8_t prog_uint8_t;
 
-// uncomment exactly one of the _LED_ORDER_*_ choices below or make your own 
-// based on the order you have your LEDs connected to the Kaimana board
-//
-#define  _LED_ORDER_DEFAULT_  true
-//#define  _LED_ORDER_JWYDER_   true
-
-
-#ifdef _LED_ORDER_DEFAULT_
-  // Map function names to default LED index numbers
-  // specific to ParadiseArcadeShop.com Kaimana board (PS360+LED)
-  // change or expand as needed
-  //
-  //   KAIMANA->LED_JOY->LED_HOME->LED_SELECT->LED_START->LED_P1->LED-P2->LED_P3->LED-P4->LED_K1->LED-K2->LED_K3->LED-K4
-  //
-  #define  LED_JOY     0
-  #define  LED_HOME    1
-  #define  LED_SELECT  2
-  #define  LED_START   3
-  #define  LED_P1      4
-  #define  LED_P2      5
-  #define  LED_P3      6
-  #define  LED_P4      7
-  #define  LED_K1      8
-  #define  LED_K2      9
-  #define  LED_K3      10
-  #define  LED_K4      11
-  #define  LED_GUIDE   12
-  #define  LED_BACK    13
-#endif
-
-
-#ifdef _LED_ORDER_JWYDER_
-  // Map function names to LED index numbers 
-  // example for just K4-K1 and P1-P4 are connected first to the Kaimana board
-  // submitted by jwyder
-  //
-  //   KAIMANA->LED-K4->LED_K3->LED_K2->LED_K1->LED-P1->LED_P2->LED-P3->LED_P4->LED_JOY->LED_HOME->LED_SELECT->LED_START
-  //
-  #define  LED_K4      0
-  #define  LED_K3      1
-  #define  LED_K2      2
-  #define  LED_K1      3
-  #define  LED_P1      4
-  #define  LED_P2      5
-  #define  LED_P3      6
-  #define  LED_P4      7
-  #define  LED_JOY     8
-  #define  LED_HOME    9
-  #define  LED_GUIDE   9
-  #define  LED_SELECT  10
-  #define  LED_BACK    10
-  #define  LED_START   11
-#endif
-
-
-// maximum number of LEDs attached to Kaimana board
-// best to leave value untouched at 12 unless you understand why
-#define  LED_COUNT   14
-
-
-// general definitions for delays and other customizable features
+// Map function names to arduino leonardo atmega32u4 digital pin numbers
 // specific to ParadiseArcadeShop.com Kaimana board (PS360+LED)
-#define  BOOT_COLOR_DELAY         250    // value in miliseconds
-#define  BOOT_COMPLETE_DELAY      500    // value in miliseconds
-#define  MAIN_LOOP_DELAY           50    // value in miliseconds - used main loop
-#define  IDLE_TIMEOUT_SECONDS      30    // value in seconds - normally 60 or 30 seconds but set very short for testing
-#define  IDLE_ANIMATION_DELAY       8    // value in miliseconds - use smaller value for faster idle animation playback
+#define  PIN_DOWN    11
+#define  PIN_UP      18
+#define  PIN_LEFT    19
+#define  PIN_RIGHT   20
+#define  PIN_HOME    8
+#define  PIN_GUIDE   8
+#define  PIN_SELECT  9
+#define  PIN_BACK    9
+#define  PIN_START   10
+#define  PIN_EXTRA   10 //this pin does not exist
+#define  PIN_P1      3
+#define  PIN_P2      2
+#define  PIN_P3      0
+#define  PIN_P4      1
+#define  PIN_K1      4
+#define  PIN_K2      21
+#define  PIN_K3      12
+#define  PIN_K4      6
+//
+#define  PIN_LED     23
 
 
-// definitions of RGB values use by random color generator: setLEDRandomColor(int)
-#define  COLOR_RANDOM_1    127,220,000    // lime green
-#define  COLOR_RANDOM_2    127,000,220    // purple
-#define  COLOR_RANDOM_3    000,220,220    // blue
-#define  COLOR_RANDOM_4    000,255,127    // cyan
-#define  COLOR_RANDOM_5    000,127,255    // cobalt blue
-#define  COLOR_RANDOM_6    255,000,000    // red
-#define  COLOR_RANDOM_7    220,127,000    // orange
-#define  COLOR_RANDOM_8    220,000,127    // magenta
-#define  PINK
+// Map function names to default LED index numbers
+// specific to ParadiseArcadeShop.com Kaimana board (PS360+LED)
+// change or expand as needed
+//
+//   KAIMANA->LED_JOY->LED_HOME->LED_SELECT->LED_START->LED_P1->LED-P2->LED_P3->LED-P4->LED_K1->LED-K2->LED_K3->LED-K4
+//
+#define  LED_JOY     0
+#define  LED_HOME    1
+#define  LED_SELECT  2
+#define  LED_START   3
+#define  LED_P1      4
+#define  LED_P2      5
+#define  LED_P3      6
+#define  LED_P4      7
+#define  LED_K1      8
+#define  LED_K2      9
+#define  LED_K3      10
+#define  LED_K4      11
+#define  LED_GUIDE   12
+#define  LED_BACK    13
 
+// number of switch inputs on kaimana
+#define  SWITCH_COUNT         15
+
+// if this is changed then Kaimana::switchHistoryTest must also be revised
+#define  SWITCH_HISTORY_MAX  16
+
+// Number of leds on controller
+#define  LED_COUNT    14   
+
+
+// Size of the moves tracked on the controller
+#define  BUTTON_HISTORY_SIZE 10
+
+// Map function names to binary input masks on atmega32u4 digital pin numbers
+// specific to ParadiseArcadeShop.com Kaimana board (PS360+LED)
+#define  MASK_JOYSTICK        0x8000UL
+#define  MASK_MENU_START      0x4000UL
+#define  MASK_MENU_SELECT     0x2000UL
+#define  MASK_MENU_HOME       0x1000UL
+#define  MASK_ATTACK_UP       0x0800UL
+#define  MASK_ATTACK_DOWN     0x0400UL
+#define  MASK_ATTACK_LEFT     0x0200UL
+#define  MASK_ATTACK_RIGHT    0x0100UL
+#define  MASK_ATTACK_K4       0x0080UL
+#define  MASK_ATTACK_K3       0x0040UL
+#define  MASK_ATTACK_K2       0x0020UL
+#define  MASK_ATTACK_K1       0x0010UL
+#define  MASK_ATTACK_P4       0x0008UL
+#define  MASK_ATTACK_P3       0x0004UL
+#define  MASK_ATTACK_P2       0x0002UL
+#define  MASK_ATTACK_P1       0x0001UL
+#define  MASK_ATTACK_NONE     0x0000UL
+#define  MASK_ATTACK_FALSE    0xFFFFUL
+#define  MASK_TOURNAMENT_MODE 0xFF00UL
+#define  MASK_ATTACK_REMOVAL  0x0F00UL
+
+//// Move patterns
+//#define  COMBO_PATTERN_1A    ATTACK_RIGHT + ATTACK_P1, ATTACK_RIGHT, ATTACK_DOWN + ATTACK_RIGHT, ATTACK_DOWN
+
+
+// Delays for timings throughout program
+#define  BOOT_DELAY           250
+#define  MAIN_LOOP_DELAY      50
+#define  IDLE_TIMEOUT         30
+#define  IDLE_ANIMATION_DELAY 8
+
+// Color count
+#define  COLOR_COUNT 14
+
+// Color rgb codes
+#define  WHITE   255,255,255
+#define  BLACK   000,000,000
+#define  RED     255,000,000
+#define  GREEN   000,255,000
+#define  BLUE    000,000,255
+#define  GOLD    255,215,000
+#define  YELLOW  255,255,000
+#define  PINK    255,000,255
+#define  CYAN    000,255,255
+#define  ORANGE  127,073,006
+#define  PURPLE  255,000,255
+#define  COBALT  000,127,255
+#define  MAGENTA 220,000,127
+#define  LIME    127,220,000
+
+
+// Animation constants
+
+// Idle animaiton
+#define  IDLE_SIZE           768
+#define  IDLE_OFFSET_2       512
+#define  IDLE_OFFSET_1       256
+#define  IDLE_OFFSET_0       0
+#define  IDLE_OFFSET         12    
+
+// Fireball Animation
+#define  FIREBALL_SIZE       768    // size of animation array
+#define  FIREBALL_OFFSET_3   288    
+#define  FIREBALL_OFFSET_2   192    
+#define  FIREBALL_OFFSET_1    96    
+#define  FIREBALL_DELAY      350    // value in microseconds
 
 // definitions for combo switch patterns
 //
@@ -135,7 +154,6 @@
 
 
 // data points for single full sinusoidal wave _/-\_/-
-//
 const prog_uint8_t sinusoid[257] PROGMEM = {
   0, 3, 6, 9, 12, 15, 18, 21, 24, 28, 31, 34, 37, 40, 43, 46, 49, 52,
   55, 58, 61, 64, 68, 71, 74, 77, 79, 82, 85, 88, 91, 94, 97, 100, 103,
@@ -157,9 +175,7 @@ const prog_uint8_t sinusoid[257] PROGMEM = {
   21, 18, 15, 12, 9, 6, 3, 0
 };
 
-
 // data points for color cycling
-//
 const prog_uint8_t colorCycleData[] PROGMEM = {
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
@@ -222,7 +238,4 @@ const prog_uint8_t colorCycleData[] PROGMEM = {
    30,  28,  26,  24,  22,  20,  18,  16,  14,  12,  10,   8,   6,   4,   2,   0
 };
 
-
-
 #endif
-
