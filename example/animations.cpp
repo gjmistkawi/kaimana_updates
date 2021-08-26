@@ -24,19 +24,19 @@
 //  Revised:  October 29, 2013    zonbipanda // gmail.com
 //  Revised:  April   11, 2015    zonbipanda // gmail.com  -- Arduino 1.6.3 Support
 //
-/*
+
 #define __PROG_TYPES_COMPAT__
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include "Arduino.h"
-//#include "kaimana.h"
-//#include "kaimana_custom.h"
+#include "kaimana.h"
+#include "constants.h"
 #include "animations.h"
 
 
 // Color Fade Animation when Idle
 //
-int animation_idle(void)
+int animationIdle(void)
 {
   int  index;
   int  i;
@@ -77,8 +77,200 @@ int animation_idle(void)
 }
 
 
-// Hadouken (Fireball)
+// ==============================================================
 //
+//  Added Animations
+//
+// ==============================================================
+
+// Generic Animations
+
+// turns 1 led on for a duration, then back to black
+void blinkLed(int led, int delay_time, int iR, int iG, int iB)
+{
+  kaimana.setLED( led, iR, iG, iB);
+  kaimana.updateALL();
+  delay(delay_time);
+  kaimana.setLED( led, BLACK );
+  kaimana.updateALL();
+}
+
+// turns 2 leds on for a duration, then back to black
+void blinkLedPair(int led1, int led2, int delay_time, int iR, int iG, int iB)
+{
+  kaimana.setLED( led1, iR, iG, iB);
+  kaimana.setLED( led2, iR, iG, iB);
+  kaimana.updateALL();
+  delay(delay_time);
+  kaimana.setLED( led1, BLACK );
+  kaimana.setLED( led2, BLACK );
+  kaimana.updateALL();
+  delay(1); //need delay of 1, otherwise leds stay dark
+}
+
+
+// Specific Animations
+
+void ledChecker(void)
+{
+  int delay_time = 500;
+
+  for(int i = 0; i < 14; i++)
+  {
+    delay(1);
+    kaimana.setALL(BLACK);
+    delay(1);
+    kaimana.setLED(i, WHITE);
+    kaimana.updateALL();
+    delay(delay_time);
+  }
+}
+
+// animation runs when combo-break button is pressed
+void comboBreakAnimation(void)
+{
+  int delay_time = 50;
+
+  for(int i = 0; i < 20; i++)
+  {
+    kaimana.setALL(WHITE);
+    for(int j = 0; j < 14; j++)
+    {
+      if((i%2) == (j%2))
+      {
+        kaimana.setLEDRandomColor(j);
+      }
+    }
+    kaimana.updateALL();
+    delay(delay_time);
+  }
+}
+
+// animation runs when roman cancel button is pressed
+void romanCancelAnimation(void) {
+  // top row
+  kaimana.setLED(0, PURPLE);
+  kaimana.setLED(1, PURPLE);
+  kaimana.setLED(8, PURPLE);
+  kaimana.setLED(9, PURPLE);
+
+  // middle row
+  kaimana.setLED(2,  BLUE);
+  kaimana.setLED(3,  BLUE);
+  kaimana.setLED(10, BLUE);
+  kaimana.setLED(11, BLUE);
+
+  // bottom row
+  kaimana.setLED(4,  YELLOW);
+  kaimana.setLED(5,  YELLOW);  
+  kaimana.setLED(12, YELLOW);
+  kaimana.setLED(13, YELLOW);
+
+  // center button
+  kaimana.setLED(6, RED);
+  kaimana.setLED(7, RED);
+
+  kaimana.updateALL();
+  delay(30); 
+
+
+  kaimana.setALL(BLACK);
+  kaimana.updateALL();
+  delay(50);
+
+  // top row
+  kaimana.setLED(0, PURPLE);
+  kaimana.setLED(1, PURPLE);
+  kaimana.setLED(8, PURPLE);
+  kaimana.setLED(9, PURPLE);
+
+  // middle row
+  kaimana.setLED(2,  BLUE);
+  kaimana.setLED(3,  BLUE);
+  kaimana.setLED(10, BLUE);
+  kaimana.setLED(11, BLUE);
+
+  // bottom row
+  kaimana.setLED(4,  YELLOW);
+  kaimana.setLED(5,  YELLOW);  
+  kaimana.setLED(12, YELLOW);
+  kaimana.setLED(13, YELLOW);
+
+  // center button
+  kaimana.setLED(6, RED);
+  kaimana.setLED(7, RED);
+
+  kaimana.updateALL();
+  delay(550);
+}
+
+// blink main button when toggling tournament mode for clarity
+void tournamentModeToggleAnimation(int iR, int iG, int iB)
+{
+  int delay_time = IDLE_ANIMATION_DELAY*10;
+  kaimana.setALL(BLACK);
+  kaimana.updateALL();
+
+  for(int i = 0; i < 3; i++)
+  {
+    blinkLedPair(LED_P3, LED_P4, delay_time, iR, iG, iB);
+    delay(delay_time);
+  }
+}
+
+// creates a looping animation around the controller
+// my buttons are layed out oddly for wiring though,
+// so this will need to be editted by controller
+void startupAnimation(void)
+{
+  int delay_time = IDLE_ANIMATION_DELAY*10;
+
+  for(int i = 0; i < 3; i++)
+  {
+    blinkLedPair(LED_P3, LED_P4, delay_time, WHITE);
+    delay(delay_time);
+  }
+
+  delay(delay_time);
+
+  kaimana.setLED( LED_P3, PINK);
+  kaimana.setLED( LED_P4, PINK);
+
+  blinkLed(LED_K1,     delay_time, CYAN);
+
+  for(int i = 0; i < 3; i++)
+  {
+    blinkLedPair(LED_K2,     LED_K1,     delay_time, CYAN);
+    blinkLedPair(LED_K3,     LED_K2,     delay_time, CYAN);
+    blinkLedPair(LED_K4,     LED_K3,     delay_time, CYAN);
+    blinkLedPair(LED_GUIDE,  LED_K4,     delay_time, CYAN);
+    blinkLedPair(LED_BACK,   LED_GUIDE,  delay_time, CYAN);
+    blinkLedPair(LED_P2,     LED_BACK,   delay_time, CYAN);
+    blinkLedPair(LED_P1,     LED_P2,     delay_time, CYAN);
+    blinkLedPair(LED_START,  LED_P1,     delay_time, CYAN);
+    blinkLedPair(LED_SELECT, LED_START,  delay_time, CYAN);
+    blinkLedPair(LED_HOME,   LED_SELECT, delay_time, CYAN);
+    blinkLedPair(LED_JOY,    LED_HOME,   delay_time, CYAN);
+    blinkLedPair(LED_K1,     LED_JOY,    delay_time, CYAN);
+  }
+
+  kaimana.setALL(PINK);
+  kaimana.updateALL();
+
+  delay(BOOT_DELAY*2);
+  kaimana.setALL( BLACK );
+  kaimana.updateALL();
+  delay(BOOT_DELAY);
+}
+
+// ==============================================================
+//
+//  Ryu combination animations
+//
+// ==============================================================
+
+
+// Hadouken (Fireball)
 void animation_combo_1(void)
 {
   int  index;
@@ -193,7 +385,6 @@ void animation_combo_1(void)
 
 
 // Shoryuken (Dragon Punch)
-//
 void animation_combo_2(void)
 {
   kaimana.setALL(BLACK);
@@ -206,7 +397,6 @@ void animation_combo_2(void)
 
 
 // Tatsumaki Senpukyaku (Hurricane Kick)
-//
 void animation_combo_3(void)
 {
 
@@ -318,7 +508,6 @@ void animation_combo_3(void)
 
 
 // Super (Shinkuu Hadouken)
-//
 void animation_combo_4(void)
 {
   kaimana.setALL(BLACK);
@@ -331,7 +520,6 @@ void animation_combo_4(void)
 
 
 // Ultra 1 (Metsu Hadouken)
-//
 void animation_combo_5(void)
 {
   kaimana.setALL(BLACK);
@@ -344,7 +532,6 @@ void animation_combo_5(void)
 
 
 // Ultra 2 (Metsu Shoryuken)
-//
 void animation_combo_6(void)
 {
   kaimana.setALL(BLACK);
@@ -401,163 +588,3 @@ void animation_combo_6(void)
 
   kaimana.setALL(BLACK);
 }
-
-
-//Utility functions
-// set LED to one of 8 predefined colors selected at random
-//
-void setLEDRandomColor2(int index)
-{
-  switch(random(1,8))    // pick a random color between 1 and 8
-  {
-    case 1:
-      kaimana.setLED(index, COLOR_RANDOM_1);
-      break;
-    case 2:
-      kaimana.setLED(index, COLOR_RANDOM_2);
-      break;
-    case 3:
-      kaimana.setLED(index, COLOR_RANDOM_3);
-      break;
-    case 4:
-      kaimana.setLED(index, COLOR_RANDOM_4);
-      break;
-    case 5:
-      kaimana.setLED(index, COLOR_RANDOM_5);
-      break;
-    case 6:
-      kaimana.setLED(index, COLOR_RANDOM_6);
-      break;
-    case 7:
-      kaimana.setLED(index, COLOR_RANDOM_7);
-      break;
-    case 8:
-      kaimana.setLED(index, COLOR_RANDOM_8);
-      break;
-    default:   // any undefined value so discard data and set led to BLACK
-      kaimana.setLED(index, BLACK);    
-      break;
-  }  
-}
-
-//New animations
-//Generic Animations
-
-//turns 1 led on for a duration, then back to black
-void blink_led(int led, int delay_time, int iR, int iG, int iB)
-{
-  kaimana.setLED( led, iR, iG, iB);
-  kaimana.updateALL();
-  delay(delay_time);
-  kaimana.setLED( led, BLACK );
-  kaimana.updateALL();
-}
-
-//turns 2 leds on for a duration, then back to black
-void blink_led_pair(int led1, int led2, int delay_time, int iR, int iG, int iB)
-{
-  kaimana.setLED( led1, iR, iG, iB);
-  kaimana.setLED( led2, iR, iG, iB);
-  kaimana.updateALL();
-  delay(delay_time);
-  kaimana.setLED( led1, BLACK );
-  kaimana.setLED( led2, BLACK );
-  kaimana.updateALL();
-  delay(1); //need delay of 1, otherwise leds stay dark
-}
-
-//Specific Animations
-
-bool led_checker(void)
-{
-  int delay_time = 500;
-
-  for(int i = 0; i < 14; i++)
-  {
-    kaimana.setALL(BLACK);
-    kaimana.setLED(i, WHITE);
-    kaimana.updateALL();
-    delay(delay_time);
-  }
-  return true;
-}
-
-//animation runs when combo-break button is pressed
-void combo_break_animation(void)
-{
-  int delay_time = 50;
-
-  for(int i = 0; i < 20; i++)
-  {
-    kaimana.setALL(WHITE);
-    for(int j = 0; j < 14; j++)
-    {
-      if((i%2) == (j%2))
-      {
-        setLEDRandomColor2(j);
-      }
-    }
-    kaimana.updateALL();
-    delay(delay_time);
-  }
-}
-
-//blink main button when toggling tournament mode
-//for clarity
-void tournament_mode_toggle_animation(int iR, int iG, int iB)
-{
-  int delay_time = IDLE_ANIMATION_DELAY*10;
-  kaimana.setALL(BLACK);
-  kaimana.updateALL();
-
-  for(int i = 0; i < 3; i++)
-  {
-    blink_led_pair(LED_P3, LED_P4, delay_time, iR, iG, iB);
-    delay(delay_time);
-  }
-}
-
-//creates a looping animation around the controller
-//my buttons are layed out oddly for wiring though,
-//so this will need to be editted by controller
-void startup_animation(void)
-{
-  int delay_time = IDLE_ANIMATION_DELAY*10;
-
-  for(int i = 0; i < 3; i++)
-  {
-    blink_led_pair(LED_P3, LED_P4, delay_time, WHITE);
-    delay(delay_time);
-  }
-
-  delay(delay_time);
-
-  kaimana.setLED( LED_P3, PINK);
-  kaimana.setLED( LED_P4, PINK);
-
-  blink_led(LED_K1,     delay_time, AQUA);
-
-  for(int i = 0; i < 3; i++)
-  {
-    blink_led_pair(LED_K2,     LED_K1,     delay_time, AQUA);
-    blink_led_pair(LED_K3,     LED_K2,     delay_time, AQUA);
-    blink_led_pair(LED_K4,     LED_K3,     delay_time, AQUA);
-    blink_led_pair(LED_GUIDE,  LED_K4,     delay_time, AQUA);
-    blink_led_pair(LED_BACK,   LED_GUIDE,  delay_time, AQUA);
-    blink_led_pair(LED_P1,     LED_BACK,   delay_time, AQUA);
-    blink_led_pair(LED_P2,     LED_P1,     delay_time, AQUA);
-    blink_led_pair(LED_START,  LED_P2,     delay_time, AQUA);
-    blink_led_pair(LED_SELECT, LED_START,  delay_time, AQUA);
-    blink_led_pair(LED_HOME,   LED_SELECT, delay_time, AQUA);
-    blink_led_pair(LED_JOY,    LED_HOME,   delay_time, AQUA);
-    blink_led_pair(LED_K1,     LED_JOY,    delay_time, AQUA);
-  }
-
-  kaimana.setALL(PINK);
-  kaimana.updateALL();
-
-  delay(BOOT_COLOR_DELAY*2);
-  kaimana.setALL( BLACK );
-  delay( BOOT_COMPLETE_DELAY );
-}
-*/

@@ -9,111 +9,99 @@ Controller::Controller(void) {
     randomSeed(analogRead(4));
 
     // create list of colors
-    RGB_Colors* _colors = new RGB_Colors();
+    RGB_Colors _colors = RGB_Colors();
 
     // create list of LEDs
-    LED* _leds[LED_COUNT] = {
-        new LED(LED_JOY,    _colors->white()),
-        new LED(LED_HOME,   _colors->white()),
-        new LED(LED_SELECT, _colors->white()),
-        new LED(LED_START,  _colors->white()),
-        new LED(LED_P1,     _colors->white()),
-        new LED(LED_P2,     _colors->white()),
-        new LED(LED_P3,     _colors->white()),
-        new LED(LED_P4,     _colors->white()),
-        new LED(LED_K1,     _colors->white()),
-        new LED(LED_K2,     _colors->white()),
-        new LED(LED_K3,     _colors->white()),
-        new LED(LED_K4,     _colors->white()),
-        new LED(LED_GUIDE,  _colors->white()),
-        new LED(LED_BACK,   _colors->white())
+    LED _leds[LED_COUNT] = {
+        LED(LED_JOY,    _colors.white()),
+        LED(LED_HOME,   _colors.white()),
+        LED(LED_SELECT, _colors.white()),
+        LED(LED_START,  _colors.white()),
+        LED(LED_P1,     _colors.white()),
+        LED(LED_P2,     _colors.white()),
+        LED(LED_P3,     _colors.white()),
+        LED(LED_P4,     _colors.white()),
+        LED(LED_K1,     _colors.white()),
+        LED(LED_K2,     _colors.white()),
+        LED(LED_K3,     _colors.white()),
+        LED(LED_K4,     _colors.white()),
+        LED(LED_GUIDE,  _colors.white()),
+        LED(LED_BACK,   _colors.white())
     };
 
 
     // create button lists and initialize pin activation
-    Button* _allButtons[TOTAL_BUTTON_COUNT] = {
-        new LED_Button(_leds[6],  _leds[7],  PIN_UP, (MASK_ATTACK_UP + MASK_JOYSTICK)),
-        new Button(PIN_DOWN,  (MASK_ATTACK_DOWN  + MASK_JOYSTICK)),
-        new Button(PIN_LEFT,  (MASK_ATTACK_LEFT  + MASK_JOYSTICK)),
-        new Button(PIN_RIGHT, (MASK_ATTACK_RIGHT + MASK_JOYSTICK)),
-        new LED_Button(_leds[0],  _leds[1],  PIN_HOME,   MASK_MENU_HOME),
-        new LED_Button(_leds[2],  _leds[3],  PIN_GUIDE,  MASK_MENU_HOME),
-        new LED_Button(_leds[4],  _leds[5],  PIN_SELECT, MASK_MENU_SELECT),
-        new LED_Button(_leds[8],  _leds[9],  PIN_BACK,   MASK_MENU_SELECT),
-        new LED_Button(_leds[10], _leds[11], PIN_START,  MASK_MENU_START),
-        new LED_Button(_leds[12], _leds[13], PIN_EXTRA,  MASK_MENU_START),
-        new Button(PIN_P1, MASK_ATTACK_P1),
-        new Button(PIN_P2, MASK_ATTACK_P2),
-        new Button(PIN_P3, MASK_ATTACK_P3),
-        new Button(PIN_P4, MASK_ATTACK_P4),
-        new Button(PIN_K1, MASK_ATTACK_K1),
-        new Button(PIN_K2, MASK_ATTACK_K2),
-        new Button(PIN_K3, MASK_ATTACK_K3),
-        new Button(PIN_K4, MASK_ATTACK_K4)
+    Button _allButtons[TOTAL_BUTTON_COUNT] = {
+        LED_Button(&_leds[6],  &_leds[7],  PIN_UP, (MASK_ATTACK_UP + MASK_JOYSTICK)),
+        Button(PIN_DOWN,  (MASK_ATTACK_DOWN  + MASK_JOYSTICK)),
+        Button(PIN_LEFT,  (MASK_ATTACK_LEFT  + MASK_JOYSTICK)),
+        Button(PIN_RIGHT, (MASK_ATTACK_RIGHT + MASK_JOYSTICK)),
+        LED_Button(&_leds[0],  &_leds[1],  PIN_HOME,   MASK_MENU_HOME),
+        LED_Button(&_leds[2],  &_leds[3],  PIN_GUIDE,  MASK_MENU_HOME),
+        LED_Button(&_leds[4],  &_leds[5],  PIN_SELECT, MASK_MENU_SELECT),
+        LED_Button(&_leds[8],  &_leds[9],  PIN_BACK,   MASK_MENU_SELECT),
+        LED_Button(&_leds[10], &_leds[11], PIN_START,  MASK_MENU_START),
+        LED_Button(&_leds[12], &_leds[13], PIN_EXTRA,  MASK_MENU_START),
+        Button(PIN_P1, MASK_ATTACK_P1),
+        Button(PIN_P2, MASK_ATTACK_P2),
+        Button(PIN_P3, MASK_ATTACK_P3),
+        Button(PIN_P4, MASK_ATTACK_P4),
+        Button(PIN_K1, MASK_ATTACK_K1),
+        Button(PIN_K2, MASK_ATTACK_K2),
+        Button(PIN_K3, MASK_ATTACK_K3),
+        Button(PIN_K4, MASK_ATTACK_K4)
     };
 
     Button* _joystickButtons[JOYSTICK_BUTTON_COUNT] = {
-        _allButtons[0], //up
-        _allButtons[1], //down
-        _allButtons[2], //left
-        _allButtons[3]  //right
+        &_allButtons[0], //up
+        &_allButtons[1], //down
+        &_allButtons[2], //left
+        &_allButtons[3]  //right
     };
 
     Button* _menuButtons[MENU_BUTTON_COUNT] = {
-        _allButtons[4], //home
-        _allButtons[5], //guide
-        _allButtons[6], //select
-        _allButtons[7], //back
-        _allButtons[8], //start
-        _allButtons[9]  //extra
+        &_allButtons[4], //home
+        &_allButtons[5], //guide
+        &_allButtons[6], //select
+        &_allButtons[7], //back
+        &_allButtons[8], //start
+        &_allButtons[9]  //extra
     };
 
     Button* _attackButtons[ATTACK_BUTTON_COUNT] = {
-        _allButtons[10], //p1
-        _allButtons[11], //p2
-        _allButtons[12], //p3
-        _allButtons[13], //p4
-        _allButtons[14], //k1
-        _allButtons[15], //k2
-        _allButtons[16], //k3
-        _allButtons[17]  //k4
+        &_allButtons[10], //p1
+        &_allButtons[11], //p2
+        &_allButtons[12], //p3
+        &_allButtons[13], //p4
+        &_allButtons[14], //k1
+        &_allButtons[15], //k2
+        &_allButtons[16], //k3
+        &_allButtons[17]  //k4
     };
 
     for(int i = 0; i < TOTAL_BUTTON_COUNT; i++) {
-        _allButtons[i]->activatePin();
+        _allButtons[i].activatePin();
     }
 
     buttonHistoryClear();
     //startupAnimation();
 }
 
-Controller::~Controller(void) {
-    for(int i = 0; i < TOTAL_BUTTON_COUNT; i++) {
-        delete(_allButtons[i]);
-    }
-
-    for(int i = 0; i < LED_COUNT; i++) {
-        delete(_leds[i]);
-    }
-
-    delete(_colors);
-}
-
 void Controller::displayLEDs(void) {
     Color* color;
 
     for(int i = 0; i < LED_COUNT; i++) {
-        if(_leds[i]->isOn()) {
-            color = _leds[i]->getColor();
+        if(_leds[i].isOn()) {
+            color = _leds[i].getColor();
         }
 
         // If the switch is off, set the color to black
         else {
-            color = _colors->black();
+            color = _colors.black();
         }
 
-        //color = _colors->gold();
-        //color = new Color(GOLD);
+        //color = _colors.gold();
+        //Color color1 = Color(GOLD);
 
         _led[i].r = color->r;
         _led[i].g = color->g;
@@ -242,7 +230,7 @@ void Controller::displayLEDs(void) {
 
 void Controller::setAllLEDs(Color* color) {
     for(int i = 0; i < LED_COUNT; i++) {
-        _leds[i]->setColor(color);
+        _leds[i].setColor(color);
     }
 }
 
@@ -260,7 +248,7 @@ void Controller::buttonHistoryUpdate(uint16_t input) {
 
 void Controller::tournamentModeToggle(bool tournamentMode) {
     for(int i = 0; i < LED_COUNT; i++) {
-        _leds[i]->toggleOn(!tournamentMode);
+        _leds[i].toggleOn(!tournamentMode);
     }
 
     _tournamentMode = tournamentMode;
@@ -282,7 +270,7 @@ bool Controller::checkButtons(void) {
     bool buttonPressed = false; 
     uint16_t buttonActivity = MASK_ATTACK_NONE;
 
-    buttonActivity += checkJoystickButtons(_colors->white());
+    buttonActivity += checkJoystickButtons(_colors.white());
     buttonActivity += checkMenuButtons();
     buttonActivity += checkAttackButtons();
 
@@ -297,11 +285,8 @@ bool Controller::checkButtons(void) {
     }
 
     else {
-        setAllLEDs(_colors->black());
-    }
-
-    setAllLEDs(_colors->red());
-    
+        setAllLEDs(_colors.black());
+    }    
 
     return buttonPressed;
 }
@@ -316,7 +301,7 @@ uint16_t Controller::checkJoystickButtons(Color* color) {
     }
 
     if(joystickDirection != MASK_ATTACK_NONE) {
-        setAllLEDs(_colors->white());
+        setAllLEDs(_colors.white());
         joystickCenterButton(joystickDirection);
     }
 
@@ -329,31 +314,31 @@ void Controller::joystickCenterButton(uint16_t direction) {
     switch(direction)
     {
         case MASK_ATTACK_RIGHT:   // right
-            button->changeColor(_colors->green());
+            button->changeColor(_colors.green());
             break;
         case MASK_ATTACK_LEFT:    // left
-            button->changeColor(_colors->green());
+            button->changeColor(_colors.green());
             break;
         case MASK_ATTACK_DOWN:    // down
-            button->changeColor(_colors->red());
+            button->changeColor(_colors.red());
             break;
         case MASK_ATTACK_DOWN + MASK_ATTACK_RIGHT:    // down + right
-            button->changeColor(_colors->yellow());
+            button->changeColor(_colors.yellow());
             break;
         case MASK_ATTACK_DOWN + MASK_ATTACK_LEFT:    // down + left
-            button->changeColor(_colors->yellow());
+            button->changeColor(_colors.yellow());
             break;
         case MASK_ATTACK_UP:    // up
-            button->changeColor(_colors->blue());
+            button->changeColor(_colors.blue());
             break;
         case MASK_ATTACK_UP + MASK_ATTACK_RIGHT:    // up + right
-            button->changeColor(_colors->cyan());
+            button->changeColor(_colors.cyan());
             break;
         case MASK_ATTACK_UP + MASK_ATTACK_LEFT:   // up + left
-            button->changeColor(_colors->cyan());
+            button->changeColor(_colors.cyan());
             break;
         default:   // zero or any undefined value on an 8 way stick like UP+DOWN which is not happening on my watch
-            button->changeColor(_colors->white());
+            button->changeColor(_colors.white());
             break;
     }  
 }
@@ -363,12 +348,12 @@ uint16_t Controller::checkMenuButtons(void) {
     uint16_t activity = MASK_ATTACK_NONE;
 
     // better to do this manually than with a loop to specify animations
-    _menuButtons[0]->isPressed() ? (setAllLEDs(_colors->blue()), activity |= _menuButtons[0]->getMask()) : true;    //home
-    _menuButtons[1]->isPressed() ? (setAllLEDs(_colors->blue()), activity |= _menuButtons[1]->getMask()) : true;    //guide
-    _menuButtons[2]->isPressed() ? (setAllLEDs(_colors->blue()), activity |= _menuButtons[2]->getMask()) : true;    //select
-    _menuButtons[3]->isPressed() ? (setAllLEDs(_colors->blue()), activity |= _menuButtons[3]->getMask()) : true;    //back
-    _menuButtons[4]->isPressed() ? (setAllLEDs(_colors->blue()), activity |= _menuButtons[4]->getMask()) : true;    //start
-    _menuButtons[5]->isPressed() ? (setAllLEDs(_colors->blue()), activity |= _menuButtons[5]->getMask()) : true;    //extra
+    _menuButtons[0]->isPressed() ? (setAllLEDs(_colors.blue()), activity |= _menuButtons[0]->getMask()) : true;    //home
+    _menuButtons[1]->isPressed() ? (setAllLEDs(_colors.blue()), activity |= _menuButtons[1]->getMask()) : true;    //guide
+    _menuButtons[2]->isPressed() ? (setAllLEDs(_colors.blue()), activity |= _menuButtons[2]->getMask()) : true;    //select
+    _menuButtons[3]->isPressed() ? (setAllLEDs(_colors.blue()), activity |= _menuButtons[3]->getMask()) : true;    //back
+    _menuButtons[4]->isPressed() ? (setAllLEDs(_colors.blue()), activity |= _menuButtons[4]->getMask()) : true;    //start
+    _menuButtons[5]->isPressed() ? (setAllLEDs(_colors.blue()), activity |= _menuButtons[5]->getMask()) : true;    //extra
 
     return activity;
 }
@@ -376,19 +361,19 @@ uint16_t Controller::checkMenuButtons(void) {
 uint16_t Controller::checkAttackButtons(void) {
     uint16_t activity = MASK_ATTACK_NONE;
 
-    _attackButtons[0]->isPressed() ? (setAllLEDs(_colors->purple()),    activity |= _attackButtons[0]->getMask()) : true;    //home
-    _attackButtons[1]->isPressed() ? (setAllLEDs(_colors->magenta()),   activity |= _attackButtons[1]->getMask()) : true;    //guide
-    _attackButtons[2]->isPressed() ? (setAllLEDs(_colors->blue()),      activity |= _attackButtons[2]->getMask()) : true;    //select
-    _attackButtons[3]->isPressed() ? (setAllLEDs(_colors->cyan()),      activity |= _attackButtons[3]->getMask()) : true;    //back
-    _attackButtons[4]->isPressed() ? (setAllLEDs(_colors->green()),     activity |= _attackButtons[4]->getMask()) : true;    //start
-    _attackButtons[5]->isPressed() ? (setAllLEDs(_colors->limeGreen()), activity |= _attackButtons[5]->getMask()) : true;    //extra
-    _attackButtons[6]->isPressed() ? (setAllLEDs(_colors->yellow()),    activity |= _attackButtons[6]->getMask()) : true;    //extra
-    _attackButtons[7]->isPressed() ? (setAllLEDs(_colors->gold()),      activity |= _attackButtons[7]->getMask()) : true;    //extra
+    _attackButtons[0]->isPressed() ? (setAllLEDs(_colors.purple()),    activity |= _attackButtons[0]->getMask()) : true;    //home
+    _attackButtons[1]->isPressed() ? (setAllLEDs(_colors.magenta()),   activity |= _attackButtons[1]->getMask()) : true;    //guide
+    _attackButtons[2]->isPressed() ? (setAllLEDs(_colors.blue()),      activity |= _attackButtons[2]->getMask()) : true;    //select
+    _attackButtons[3]->isPressed() ? (setAllLEDs(_colors.cyan()),      activity |= _attackButtons[3]->getMask()) : true;    //back
+    _attackButtons[4]->isPressed() ? (setAllLEDs(_colors.green()),     activity |= _attackButtons[4]->getMask()) : true;    //start
+    _attackButtons[5]->isPressed() ? (setAllLEDs(_colors.limeGreen()), activity |= _attackButtons[5]->getMask()) : true;    //extra
+    _attackButtons[6]->isPressed() ? (setAllLEDs(_colors.yellow()),    activity |= _attackButtons[6]->getMask()) : true;    //extra
+    _attackButtons[7]->isPressed() ? (setAllLEDs(_colors.gold()),      activity |= _attackButtons[7]->getMask()) : true;    //extra
 
     return activity;
 }
 
 void Controller::temp(void) {
-    setAllLEDs(new Color(BLUE));//_colors->blue());
+    setAllLEDs(_colors.red());
     displayLEDs();
 }

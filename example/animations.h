@@ -24,7 +24,7 @@
 //  Revised:  October 29, 2013    zonbipanda // gmail.com
 //  Revised:  April   11, 2015    zonbipanda // gmail.com  -- Arduino 1.6.3 Support
 //
-/*
+
 #ifndef __animations_h__
 #define __animations_h__
 
@@ -32,22 +32,21 @@
 #include <avr/io.h>
 #include <avr/pgmspace.h>
 #include "Arduino.h"
-//#include "kaimana.h"
-//#include "kaimana_custom.h"
+#include "kaimana.h"
+#include "constants.h"
 
 extern Kaimana kaimana;
 
-#define FIREBALL_SIZE       768    // size of animation array
-#define FIREBALL_OFFSET_3   288    // used to create animation -- see code
-#define FIREBALL_OFFSET_2   192    // used to create animation -- see code
-#define FIREBALL_OFFSET_1    96    // used to create animation -- see code
-#define FIREBALL_DELAY      350    // value in microseconds
-
-
+// other function prototypes
+int  animationIdle(void);
+void startupAnimation(void);
+void tournamentModeToggleAnimation(int, int, int);
+void comboBreakAnimation(void);
+void romanCancelAnimation(void);
+void ledChecker(void);
 
 // street figher 4 - ryu's special moves (combos)
 // http://www.eventhubs.com/guides/2008/jul/06/ryu-street-fighter-4-character-guide/
-//
 void animation_combo_1(void);    // Hadouken (Fireball)
 void animation_combo_2(void);    // Shoryuken (Dragon Punch)
 void animation_combo_3(void);    // Tatsumaki Senpukyaku (Hurricane Kick)
@@ -55,14 +54,4 @@ void animation_combo_4(void);    // Super — Shinkuu Hadouken
 void animation_combo_5(void);    // Ultra 1 — Metsu Hadouken
 void animation_combo_6(void);    // Ultra 2 — Metsu Hadouken
 
-
-// other function prototypes
-int animation_idle(void);
-
-// added functions
-void startup_animation(void);
-void tournament_mode_toggle_animation(int, int, int);
-void combo_break_animation(void);
-bool led_checker(void);
-
-#endif*/
+#endif
