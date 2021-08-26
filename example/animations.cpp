@@ -282,8 +282,8 @@ void guideButtonAnimation(void) {
   delay(delay_time);
   
   for(int i = 0; i < 4; i++) {
-    kaimana.setLED( LED_P3, PURPLE);
-    kaimana.setLED( LED_P4, PURPLE);
+    kaimana.setLED( LED_P3, MAGENTA);
+    kaimana.setLED( LED_P4, MAGENTA);
     kaimana.updateALL();
     delay(delay_time/2);
 
