@@ -97,7 +97,7 @@ typedef uint8_t prog_uint8_t;
 #define  BOOT_DELAY           250
 #define  MAIN_LOOP_DELAY      50
 #define  IDLE_TIMEOUT         30
-#define  IDLE_ANIMATION_DELAY 5
+#define  IDLE_ANIMATION_DELAY 8
 
 // Color count
 #define  COLOR_COUNT 14

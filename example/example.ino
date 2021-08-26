@@ -62,7 +62,7 @@ void setup()
 // the loop routine repeats indefinitely and executes immediately following the setup() function
 void loop() 
 {
-    unsigned long timeoutTimer = millis() + (unsigned long) IDLE_ANIMATION_DELAY * 1000;
+    unsigned long timeoutTimer = millis() + (unsigned long) IDLE_ANIMATION_DELAY * 500;
 
     while(true) {
         // if no button pressed, tournament mode is off, and enough time has passed,
@@ -75,7 +75,7 @@ void loop()
 
         // update timer whenever button pressed
         else {
-          timeoutTimer = millis() + ((unsigned long)IDLE_ANIMATION_DELAY * 1000);
+          timeoutTimer = millis() + ((unsigned long)IDLE_ANIMATION_DELAY * 500);
         }
 
         kaimana.updateALL();
@@ -165,9 +165,9 @@ uint16_t checkMenuButtons() {
     uint16_t activity = MASK_ATTACK_NONE;
 
     // better to do this manually than with a loop to specify animations
-    readButton(PIN_HOME,   BLUE) ? activity |= MASK_MENU_HOME : true;   //home
-    readButton(PIN_SELECT, BLUE) ? activity |= MASK_MENU_SELECT : true;   //select
-    readButton(PIN_START,  BLUE) ? activity |= MASK_MENU_START : true;   //start
+    readButton(PIN_HOME,   BLACK) ? (guideButtonAnimation(),  activity |= MASK_MENU_HOME) :   true; //home
+    readButton(PIN_SELECT, BLACK) ? (selectButtonAnimation(), activity |= MASK_MENU_SELECT) : true; //select
+    readButton(PIN_START,  BLACK) ? (startButtonAnimation(),  activity |= MASK_MENU_START)  : true; //start
 
     return activity;
 }

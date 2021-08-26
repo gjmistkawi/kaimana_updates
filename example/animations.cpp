@@ -204,6 +204,96 @@ void romanCancelAnimation(void) {
   delay(550);
 }
 
+void selectButtonAnimation(void) {
+  int delay_time = IDLE_ANIMATION_DELAY*10;
+
+  for(int i = 0; i < 3; i++)
+  {
+    blinkLedPair(LED_K2,     LED_K1,     delay_time, GOLD);
+    blinkLedPair(LED_K3,     LED_K2,     delay_time, GOLD);
+    blinkLedPair(LED_K4,     LED_K3,     delay_time, GOLD);
+    blinkLedPair(LED_GUIDE,  LED_K4,     delay_time, GOLD);
+    blinkLedPair(LED_BACK,   LED_GUIDE,  delay_time, GOLD);
+    blinkLedPair(LED_P2,     LED_BACK,   delay_time, GOLD);
+    blinkLedPair(LED_P1,     LED_P2,     delay_time, GOLD);
+    blinkLedPair(LED_START,  LED_P1,     delay_time, GOLD);
+    blinkLedPair(LED_SELECT, LED_START,  delay_time, GOLD);
+    blinkLedPair(LED_HOME,   LED_SELECT, delay_time, GOLD);
+    blinkLedPair(LED_JOY,    LED_HOME,   delay_time, GOLD);
+    blinkLedPair(LED_K1,     LED_JOY,    delay_time, GOLD);
+  }
+
+  delay(BOOT_DELAY);
+}
+
+void startButtonAnimation(void) {
+  int delay_time = IDLE_ANIMATION_DELAY*10;
+
+  for(int i = 0; i < 3; i++)
+  {    
+    blinkLedPair(LED_JOY,    LED_HOME,   delay_time, GOLD);
+    blinkLedPair(LED_HOME,   LED_SELECT, delay_time, GOLD);
+    blinkLedPair(LED_SELECT, LED_START,  delay_time, GOLD);
+    blinkLedPair(LED_START,  LED_P1,     delay_time, GOLD);
+    blinkLedPair(LED_P1,     LED_P2,     delay_time, GOLD);
+    blinkLedPair(LED_P2,     LED_BACK,   delay_time, GOLD);
+    blinkLedPair(LED_BACK,   LED_GUIDE,  delay_time, GOLD);
+    blinkLedPair(LED_GUIDE,  LED_K4,     delay_time, GOLD);
+    blinkLedPair(LED_K4,     LED_K3,     delay_time, GOLD);
+    blinkLedPair(LED_K3,     LED_K2,     delay_time, GOLD);
+    blinkLedPair(LED_K2,     LED_K1,     delay_time, GOLD);
+    blinkLedPair(LED_K1,     LED_JOY,    delay_time, GOLD);
+  }
+
+  delay(BOOT_DELAY);
+}
+
+void guideButtonAnimation(void) {
+  int delay_time = IDLE_ANIMATION_DELAY*20;
+
+  kaimana.setLED(LED_P2, GOLD);
+  kaimana.setLED(LED_BACK, GOLD);
+  kaimana.updateALL();
+  delay(delay_time);
+  
+  kaimana.setLED(LED_P1, GOLD);
+  kaimana.setLED(LED_GUIDE, GOLD);
+  kaimana.updateALL();
+  delay(delay_time);
+
+  kaimana.setLED(LED_START, GOLD);
+  kaimana.setLED(LED_K4, GOLD);
+  kaimana.updateALL();
+  delay(delay_time);
+
+  kaimana.setLED(LED_SELECT, GOLD);
+  kaimana.setLED(LED_K3, GOLD);
+  kaimana.updateALL();
+  delay(delay_time);
+
+  kaimana.setLED(LED_HOME, GOLD);
+  kaimana.setLED(LED_K2, GOLD);
+  kaimana.updateALL();
+  delay(delay_time);
+    
+  kaimana.setLED(LED_JOY, GOLD);
+  kaimana.setLED(LED_K1, GOLD);
+  kaimana.updateALL();
+  delay(delay_time);
+  
+  for(int i = 0; i < 4; i++) {
+    kaimana.setLED( LED_P3, PURPLE);
+    kaimana.setLED( LED_P4, PURPLE);
+    kaimana.updateALL();
+    delay(delay_time/2);
+
+    kaimana.setLED( LED_P3, BLACK);
+    kaimana.setLED( LED_P4, BLACK);
+    kaimana.updateALL();  
+    delay(delay_time/2);
+  }
+}
+
 // blink main button when toggling tournament mode for clarity
 void tournamentModeToggleAnimation(int iR, int iG, int iB)
 {

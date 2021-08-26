@@ -43,6 +43,9 @@ void startupAnimation(void);
 void tournamentModeToggleAnimation(int, int, int);
 void comboBreakAnimation(void);
 void romanCancelAnimation(void);
+void selectButtonAnimation(void);
+void startButtonAnimation(void);
+void guideButtonAnimation(void);
 void ledChecker(void);
 
 // street figher 4 - ryu's special moves (combos)
