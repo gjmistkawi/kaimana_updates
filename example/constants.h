@@ -1,8 +1,12 @@
 #ifndef __constants_h__
 #define __constants_h__
 
+#define __PROG_TYPES_COMPAT__
+
 #include <avr/io.h>
 #include <avr/pgmspace.h>
+
+typedef uint8_t prog_uint8_t;
 
 // Map function names to arduino leonardo atmega32u4 digital pin numbers
 // specific to ParadiseArcadeShop.com Kaimana board (PS360+LED)
@@ -93,7 +97,7 @@
 #define  BOOT_DELAY           250
 #define  MAIN_LOOP_DELAY      50
 #define  IDLE_TIMEOUT         30
-#define  IDLE_ANIMATION_DELAY 8
+#define  IDLE_ANIMATION_DELAY 5
 
 // Color count
 #define  COLOR_COUNT 14
@@ -150,7 +154,7 @@
 
 
 // data points for single full sinusoidal wave _/-\_/-
-const uint8_t sinusoid[257] PROGMEM = {
+const prog_uint8_t sinusoid[257] PROGMEM = {
   0, 3, 6, 9, 12, 15, 18, 21, 24, 28, 31, 34, 37, 40, 43, 46, 49, 52,
   55, 58, 61, 64, 68, 71, 74, 77, 79, 82, 85, 88, 91, 94, 97, 100, 103,
   106, 109, 111, 114, 117, 120, 122, 125, 128, 131, 133, 136, 139, 141,
@@ -172,7 +176,7 @@ const uint8_t sinusoid[257] PROGMEM = {
 };
 
 // data points for color cycling
-const uint8_t colorCycleData[] PROGMEM = {
+const prog_uint8_t colorCycleData[] PROGMEM = {
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,
     0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,

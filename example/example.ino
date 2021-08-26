@@ -62,18 +62,20 @@ void setup()
 // the loop routine repeats indefinitely and executes immediately following the setup() function
 void loop() 
 {
-    unsigned long timeoutTimer = millis() + ((unsigned long) IDLE_TIMEOUT * 1000);
+    unsigned long timeoutTimer = millis() + (unsigned long) IDLE_ANIMATION_DELAY * 1000;
 
     while(true) {
         // if no button pressed, tournament mode is off, and enough time has passed,
         // run idle animation
-        if(!checkAllButtons() && !tournament_mode && millis() > timeoutTimer) {
+        if(!checkAllButtons() && !tournament_mode) {
+          if(millis() > timeoutTimer) {
             animationIdle();
+          }
         }
 
         // update timer whenever button pressed
         else {
-            timeoutTimer = millis() + ((unsigned long) IDLE_TIMEOUT * 1000);
+          timeoutTimer = millis() + ((unsigned long)IDLE_ANIMATION_DELAY * 1000);
         }
 
         kaimana.updateALL();
